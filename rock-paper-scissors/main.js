@@ -1,20 +1,20 @@
-function getComputerChoice() { // declare getComputerChoice function
-    let computerChoice = "" // create empty string variable computerChoice
+function getComputerChoice() {
+    let computerChoice = ""
     let randomInteger = Math.floor(Math.random() * 3)+1 // generate random integer from 1 to 3
-    if (randomInteger === 1) { // if number is 1 assign computerChoice to rock
+    if (randomInteger === 1) {
         computerChoice = "rock"
-    } else if (randomInteger === 2) { // if number is 2 assign computerChoice to paper
+    } else if (randomInteger === 2) {
         computerChoice = "paper"
-    } else if (randomInteger === 3) { // if number is 3 assign computerChoice to scissors
+    } else {
         computerChoice = "scissors"
     }
-    return computerChoice // return computerChoice
+    return computerChoice
 }
 
-function playRound(playerChoice, computerChoice) { // declare playRound function taking user input parameter and fire getComputerchoice
-    if (playerChoice === computerChoice) { // check for draw case
+function playRound(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) {
         return "tie"
-    } else if (playerChoice === "rock") {// check for user win cases, check for computer win cases, // return appropriate message depending on winner
+    } else if (playerChoice === "rock") {
         if (computerChoice === "paper") {
             return "computer" 
         } else if (computerChoice === "scissors") {
@@ -35,38 +35,36 @@ function playRound(playerChoice, computerChoice) { // declare playRound function
     }
 }
 
-function promptUser() { // user input function to prompt for an input
+function promptUser() {
     while (true) {
-        let userInput = prompt("State your choice: ") // prompt for user input
-        if (userInput != null || userInput != undefined) { // catches null and undefined errors
-            userInput = userInput.toLowerCase() // converts to lower case   
+        let userInput = prompt("State your choice: ")
+        if (userInput != null || userInput != undefined) {
+            userInput = userInput.toLowerCase() 
         }
-        if (userInput === "rock" || userInput === "paper" || userInput === "scissors"|| userInput === "exit") { // check if input is valid 
-            return userInput // returns input
+        if (userInput === "rock" || userInput === "paper" || userInput === "scissors"|| userInput === "exit") {
+            return userInput
         }
         alert("Please enter a correct value of either rock, paper or scissors!")
     }
 }
 
-// function calculate round winner 
-
-function calculateOverallWinner(playerScore, computerScore) { // function calculate who won the game 
+function calculateOverallWinner(playerScore, computerScore) {
     if (playerScore === computerScore) { 
         return "The game is a draw."
     }
-    return (playerScore > computerScore ? "Player wins the game!" : "Computer wins this time.") // two input variables determine who is greater return winner
+    return (playerScore > computerScore ? "Player wins the game!" : "Computer wins this time.") // if playerScore > computer score return player wins else do opposite
 }
 
-function game() { // declare game function
-    let playerScore = 0 // declare int variable of user round wins
-    let computerScore = 0 // declare int variable of computer round wins
-    for (let roundCount = 0; roundCount < 5; roundCount++) { // repeat the game five times
-        let playerChoice = promptUser() // call promptUser() function
+function game() {
+    let playerScore = 0
+    let computerScore = 0
+    for (let roundCount = 0; roundCount < 5; roundCount++) {
+        let playerChoice = promptUser()
         if (playerChoice === "exit") { 
             console.log("Exiting game.")
             return
         }
-        let computerChoice = getComputerChoice() // call getComputerChoice() function
+        let computerChoice = getComputerChoice()
         let roundWinner = playRound(playerChoice, computerChoice)
         console.log(`Player picked ${playerChoice}.`)
         console.log(`Computer picked ${playerChoice}.`)
@@ -80,7 +78,7 @@ function game() { // declare game function
             console.log("This round is a draw.")
         }
     }
-    console.log(calculateOverallWinner(playerScore,computerScore)) // returns overall winner
+    console.log(calculateOverallWinner(playerScore,computerScore))
 }
 
 console.log("Welcome to Rock, Paper, Scissors! Initialising game: ")
